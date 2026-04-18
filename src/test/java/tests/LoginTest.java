@@ -1,6 +1,7 @@
 package tests;
 
 
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,10 +18,12 @@ public class LoginTest extends BaseTest{
 	
 	@BeforeMethod  //runs before each test
 	public void initPages() {
+		driver.get("https://opensource-demo.orangehrmlive.com"); //added in before method so that each test will start by loading this login url
 		loginPage = new LoginPage(driver); // initialising the loginPage Object, driver comes from the BaseTest
 	}
 	
-	@Test
+	
+	@Test(priority = 1)
 	public void validLoginTest() {
 		loginPage.loginAs("Admin", "admin123");
 		
@@ -36,5 +39,12 @@ public class LoginTest extends BaseTest{
 		Assert.assertTrue(dashboardPage.isDashboardDisplayed(), "Dashboard not displayed after login");
 		
 	}
-
+	
+	@Test(priority = 2)
+	public void invalidLoginTest_1() {
+		loginPage.loginAs("Admin","admin1234");
+		Assert.assertEquals(loginPage.getErrorMessage(), "Invalid credentials", "Error message does not match");
+	}
+	
+	
 }

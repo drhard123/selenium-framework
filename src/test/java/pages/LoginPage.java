@@ -9,6 +9,7 @@ public class LoginPage extends BasePage {
 	private By userNameField = By.name("username");
 	private By passwordField = By.name("password");
 	private By loginButton = By.cssSelector("button[type='submit']");
+	private By invalidCredentialError = By.cssSelector(".oxd-alert-content-text");
 	
 	//Step 2 Constructor - (Passes driver up to BasePage)
 	public LoginPage(WebDriver driver) {
@@ -33,6 +34,11 @@ public class LoginPage extends BasePage {
 	enterUsername(username);
 	enterPassword(password);
 	clickLoginButton();
+	}
+	
+	//method will return the invalid login error text
+	public String getErrorMessage() {
+		return getText(invalidCredentialError);
 	}
 	
 	

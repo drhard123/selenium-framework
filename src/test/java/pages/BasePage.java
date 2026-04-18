@@ -36,4 +36,10 @@ public class BasePage {
 		new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(locator));
 		return driver.findElement(locator).isDisplayed();
 	}
+	
+	//returns the text of the element as String
+	public String getText(By locator) {
+		new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOfElementLocated(locator));
+		return driver.findElement(locator).getText();
+	}
 }
