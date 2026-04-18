@@ -25,7 +25,7 @@ public class LoginPage extends BasePage {
 	}
 	
 	public void clickLoginButton() {
-		click(loginButton);              //click method comed from BasePage
+		click(loginButton);              //click method comes from BasePage
 	}
 	
 	//Combine all 3 into one convenient method
