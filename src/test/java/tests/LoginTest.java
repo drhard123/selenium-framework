@@ -16,14 +16,14 @@ public class LoginTest extends BaseTest{
 	//no teardown - Inherited from BaseTest
 	LoginPage loginPage;
 	
-	@BeforeMethod  //runs before each test
+	@BeforeMethod(alwaysRun = true)  //runs before each test
 	public void initPages() {
-		driver.get("https://opensource-demo.orangehrmlive.com"); //added in before method so that each test will start by loading this login url
-		loginPage = new LoginPage(driver); // initialising the loginPage Object, driver comes from the BaseTest
+		getDriver().get("https://opensource-demo.orangehrmlive.com"); //added in before method so that each test will start by loading this login url
+		loginPage = new LoginPage(getDriver()); // initialising the loginPage Object, driver comes from the BaseTest
 	}
 	
 	
-	@Test(priority = 1)
+	@Test(priority = 1, groups = {"smoke", "regression"})
 	public void validLoginTest() {
 		loginPage.loginAs("Admin", "admin123");
 		
@@ -35,12 +35,12 @@ public class LoginTest extends BaseTest{
 		System.out.println(currentUrl);
 		Assert.assertTrue(currentUrl.contains("dashboard"),"Login Failed- Dashboard in URL is not found");*/
 		
-		DashboardPage dashboardPage = new DashboardPage(driver);
+		DashboardPage dashboardPage = new DashboardPage(getDriver());
 		Assert.assertTrue(dashboardPage.isDashboardDisplayed(), "Dashboard not displayed after login");
 		
 	}
 	
-	@Test(priority = 2)
+	@Test(priority = 2, groups = {"regression"})
 	public void invalidLoginTest_1() {
 		loginPage.loginAs("Admin","admin1234");
 		Assert.assertEquals(loginPage.getErrorMessage(), "Invalid credentials", "Error message does not match");
